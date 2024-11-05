@@ -1,3 +1,6 @@
 {
+  "firebase_hosting": {
+    "deploymentHostingUrl": "https://boring-realtime.web.app"
+  },
   "gemini_api": {}
 }
