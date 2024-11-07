@@ -1,9 +1,6 @@
-<div>
-    datbt.me
-</div>
+<h3 class="text-3xl font-bold underline">List user</h3>
 <ul>
-    {{items | json}}
     @for (item of items ; track item) {
-    <li>{{ item.name }}</li>
+    <li><app-user-item [item]="item" /></li>
     }
 </ul>

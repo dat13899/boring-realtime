@@ -1,7 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, inject } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, User, user } from '@angular/fire/auth';
 import { Subscription, takeUntil } from 'rxjs';
 import { BaseClass } from '../../base-class';
+import { SignalService } from '../../shared/signals/signals.service';
+import { doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { Database } from '@angular/fire/database';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +16,13 @@ import { BaseClass } from '../../base-class';
 })
 export class LoginComponent {
   private auth = inject(Auth);
+  private db = inject(Firestore);
   private baseClass = inject(BaseClass);
   user$ = user(this.auth);
-  constructor() {
+  constructor(
+    private signalService: SignalService,
+    private router: Router
+  ) {
     this.user$.pipe(takeUntil(this.baseClass.destroyed$)).subscribe((aUser: User | null) => {
       //handle user state changes here. Note, that user will be null if there is no currently logged in user.
       console.log(aUser);
@@ -37,21 +45,21 @@ export class LoginComponent {
   signInGoogle() {
     // signInWithRedirect(this.auth, new GoogleAuthProvider());
     signInWithPopup(this.auth, new GoogleAuthProvider())
-      .then((result) => {
+      .then((result: any) => {
+        console.log(result);
+        this.signalService.setUser(result?.user?.reloadUserInfo);
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (result?.user?.accessToken) {
+          let tempUser: any = {
+            email: result.user?.reloadUserInfo?.email,
+            name: result.user?.reloadUserInfo?.displayName,
+            user_id: result.user?.reloadUserInfo?.localId,
+            profile_picture: result.user?.reloadUserInfo?.photoUrl,
+          }
+          setDoc(doc(this.db, "users", result.user?.reloadUserInfo?.localId), tempUser);
+          this.router.navigate(['/']);
+        }
+      })
   }
 }

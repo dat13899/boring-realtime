@@ -4,11 +4,12 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Subscription, takeUntil } from 'rxjs';
 import { BaseClass } from '../../base-class';
+import { UserItemComponent } from "../../shared/components/user-item/user-item.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, UserItemComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,7 +25,7 @@ export class HomeComponent {
       //handle user state changes here. Note, that user will be null if there is no currently logged in user.
       console.log(aUser);
     })
-    const aCollection = collection(this.firestore, 'product')
+    const aCollection = collection(this.firestore, 'users')
     collectionData(aCollection).pipe(takeUntil(this.baseClass.destroyed$)).subscribe((data: any) => {
       this.items = data;
       console.log(this.items);

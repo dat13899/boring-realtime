@@ -43,16 +43,16 @@ export const appConfig: ApplicationConfig = {
       );
     }),
     provideAuth(() => getAuth(inject(FirebaseApp))),
-    provideAnalytics(() => getAnalytics()),
-    ScreenTrackingService,
-    UserTrackingService,
+    // provideAnalytics(() => getAnalytics()),
+    // ScreenTrackingService,
+    // UserTrackingService,
     provideFirestore(() => getFirestore()),
-    provideDatabase(() => getDatabase()),
-    provideFunctions(() => getFunctions()),
-    provideMessaging(() => getMessaging()),
-    providePerformance(() => getPerformance()),
-    provideStorage(() => getStorage()),
-    provideRemoteConfig(() => getRemoteConfig()),
-    provideVertexAI(() => getVertexAI())
+    // provideDatabase(() => getDatabase()),
+    // provideFunctions(() => getFunctions()),
+    // provideMessaging(() => getMessaging()),
+    // providePerformance(() => getPerformance()),
+    // provideStorage(() => getStorage()),
+    // provideRemoteConfig(() => getRemoteConfig()),
+    // provideVertexAI(() => getVertexAI())
   ]
 };
