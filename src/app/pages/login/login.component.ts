@@ -49,15 +49,16 @@ export class LoginComponent {
         console.log(result);
         this.signalService.setUser(result?.user?.reloadUserInfo);
         // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        const credential = GoogleAuthProvider.credentialFromResult(result);
         if (result?.user?.accessToken) {
           let tempUser: any = {
-            email: result.user?.reloadUserInfo?.email,
-            name: result.user?.reloadUserInfo?.displayName,
-            user_id: result.user?.reloadUserInfo?.localId,
-            profile_picture: result.user?.reloadUserInfo?.photoUrl,
+            email: result.user?.email,
+            displayName: result.user?.displayName,
+            phoneNumber: result.user?.phoneNumber,
+            uid: result.user?.uid,
+            photoURL: result.user?.photoURL,
           }
-          setDoc(doc(this.db, "users", result.user?.reloadUserInfo?.localId), tempUser);
+          setDoc(doc(this.db, "users", result.user?.uid), tempUser);
           this.router.navigate(['/']);
         }
       })

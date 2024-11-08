@@ -8,5 +8,9 @@ export const routes: Routes = [
     {
         path: 'login',
         loadChildren: () => import('./pages/login/login.routes').then(m => m.Login_Routes)
+    },
+    {
+        path: 'chat',
+        loadChildren: () => import('./pages/chat/chat.routes').then(m => m.Chat_Routes)
     }
 ];

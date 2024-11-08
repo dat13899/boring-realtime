@@ -1,8 +1,8 @@
 @if(item()){
-<div class="flex p-3 gap-3">
-    <img [src]="item()?.profile_picture" alt="">
+<div class="flex items-center p-3 gap-3 shadow-md rounded-md">
+    <img [src]="item()?.photoURL" alt="" class="shadow-md rounded-full h-8 w-8">
     <div>
-        {{item()?.name}}
+        {{item()?.displayName}}
     </div>
 </div>
 }
