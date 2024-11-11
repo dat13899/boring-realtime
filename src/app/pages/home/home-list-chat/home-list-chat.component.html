@@ -1,0 +1,24 @@
+<div class="p-3 flex flex-col gap-3">
+    @for (item of listUser; track $index) {
+    <ng-container [ngTemplateOutlet]="userItem" [ngTemplateOutletContext]="{item:item}"></ng-container>
+    }
+</div>
+
+<ng-template #userItem let-item="item">
+    <div class="flex items-center gap-3">
+        <div class="min-w-fit">
+            <img [src]="item?.photoURL" alt="" class="shadow-md rounded-full h-14 w-14">
+        </div>
+        <div>
+            <div class="text-sm line-clamp-1 text-white">
+                {{item?.displayName}}
+            </div>
+            <div class="text-xs line-clamp-1 mt-1 text-zinc-500">
+                Elit nulla amet non sit. Aliqua veniam magna laborum duis mollit deserunt non. Est amet velit ullamco in
+                Lorem amet voluptate. Nulla ad commodo ut cillum elit excepteur id exercitation. Ea qui non laboris et
+                Lorem adipisicing ex cupidatat laboris eiusmod deserunt. Tempor minim velit reprehenderit labore
+                proident ex do cillum eiusmod.
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,15 @@
+<div class="p-3 flex gap-3">
+    <ng-container [ngTemplateOutlet]="userItem" [ngTemplateOutletContext]="{item:user()}"></ng-container>
+    @for (item of listUser; track $index) {
+    <ng-container [ngTemplateOutlet]="userItem" [ngTemplateOutletContext]="{item:item}"></ng-container>
+    }
+</div>
+
+<ng-template #userItem let-item="item">
+    <div class="flex flex-col gap-1 w-16 text-white">
+        <img [src]="item?.photoURL" alt="" class="shadow-md rounded-full h-16 w-16">
+        <div class="text-xs line-clamp-1 text-center">
+            {{item?.displayName}}
+        </div>
+    </div>
+</ng-template>

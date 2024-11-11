@@ -1,16 +1,15 @@
 import { Router } from '@angular/router';
 import { Component, inject } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, User, user } from '@angular/fire/auth';
-import { Subscription, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { BaseClass } from '../../base-class';
 import { SignalService } from '../../shared/signals/signals.service';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { Database } from '@angular/fire/database';
-
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -43,13 +42,12 @@ export class LoginComponent {
       })
   }
   signInGoogle() {
+    this.signalService.setUser({});
     // signInWithRedirect(this.auth, new GoogleAuthProvider());
     signInWithPopup(this.auth, new GoogleAuthProvider())
       .then((result: any) => {
-        console.log(result);
-        this.signalService.setUser(result?.user?.reloadUserInfo);
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
         if (result?.user?.accessToken) {
           let tempUser: any = {
             email: result.user?.email,
@@ -58,6 +56,7 @@ export class LoginComponent {
             uid: result.user?.uid,
             photoURL: result.user?.photoURL,
           }
+          this.signalService.setUser(tempUser);
           setDoc(doc(this.db, "users", result.user?.uid), tempUser);
           this.router.navigate(['/']);
         }

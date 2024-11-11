@@ -2,3 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    // font-weight: 500;
+    src: url("../public/assets/fonts/Montserrat-Regular.woff2") format('woff2');
+    font-display: swap;
+}
+
+html,
+body {
+    background: black;
+    height: 100%;
+    font-family: "Montserrat", monospace !important;
+}
+
+body {
+    margin: 0;
+}

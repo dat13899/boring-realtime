@@ -21,7 +21,7 @@ export class LocalStorageService {
   }
   // Get the json value from local storage
   getItem(key: string) {
-    if (isPlatformBrowser(this.platformId)) {
+    // if (isPlatformBrowser(this.platformId)) {
       const encryptedData = localStorage.getItem(key);
       if (encryptedData) {
         try {
@@ -33,8 +33,8 @@ export class LocalStorageService {
           console.error("Decryption error:", error);
         }
       }
-    }
-    return null;
+    // }
+    // return null;
   }
   removeItem(key: string) {
     if (isPlatformBrowser(this.platformId)) localStorage.removeItem(key);

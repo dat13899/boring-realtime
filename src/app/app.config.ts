@@ -15,6 +15,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getRemoteConfig, provideRemoteConfig } from '@angular/fire/remote-config';
 import { getVertexAI, provideVertexAI } from '@angular/fire/vertexai-preview';
 import { isPlatformBrowser } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 export const firebaseConfig = {
   "projectId": "boring-realtime",
   "appId": "1:321409841040:web:96907f880f9d8e32686515",
@@ -46,7 +47,7 @@ export const appConfig: ApplicationConfig = {
     // provideAnalytics(() => getAnalytics()),
     // ScreenTrackingService,
     // UserTrackingService,
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore()), provideAnimationsAsync(),
     // provideDatabase(() => getDatabase()),
     // provideFunctions(() => getFunctions()),
     // provideMessaging(() => getMessaging()),

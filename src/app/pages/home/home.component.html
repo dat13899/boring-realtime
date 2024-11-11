@@ -1,4 +1,4 @@
-<app-user-item [item]="curentUser" />
+<!-- <app-user-item [item]="curentUser" />
 <div class="p-3">
     <div class="text-lg font-bold">Danh sách người dùng khác</div>
     <div class="flex flex-wrap gap-3 ">
@@ -6,4 +6,7 @@
         <app-user-item [item]="item" (click)="chatInit(item)"/>
         }
     </div>
-</div>
+</div> -->
+<app-home-header />
+<app-home-list-user [listUser]="items"/>
+<app-home-list-chat [listUser]="items"/>

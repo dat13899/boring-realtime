@@ -6,11 +6,14 @@ import { Firestore, collection, collectionData, doc, query, setDoc, where } from
 import { Subscription, takeUntil } from 'rxjs';
 import { BaseClass } from '../../base-class';
 import { UserItemComponent } from "../../shared/components/user-item/user-item.component";
+import { HomeHeaderComponent } from "./home-header/home-header.component";
+import { HomeListUserComponent } from "./home-list-user/home-list-user.component";
+import { HomeListChatComponent } from "./home-list-chat/home-list-chat.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, UserItemComponent],
+  imports: [CommonModule, UserItemComponent, HomeHeaderComponent, HomeListUserComponent, HomeListChatComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
